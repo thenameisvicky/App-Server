@@ -1,5 +1,4 @@
 const Vehicle = require('../models/vehicle.server.model');
-const logger = require('../../config/logger');
 const { createTwin } = require('./twin.server.controller');
 
 exports.addVehicle = async (req, res) => {
@@ -11,12 +10,12 @@ exports.addVehicle = async (req, res) => {
         const newVehicle = new Vehicle({ email, vin, make, model, location });
         await newVehicle.save();
 
-        logger.info(`New Vehicle Added by ${req.body.email}: ${vin}`);
+        console.log(`New Vehicle Added by ${req.body.email}: ${vin}`);
         res.json({ msg: 'New Vehicle Added Successfully', vehicle: newVehicle });
 
     } catch (error) {
 
-        logger.error(`Error Registering Vehicle: ${error.message}`);
+        console.error(`Error Registering Vehicle: ${error.message}`);
         res.status(500).json({ msg: error.message });
 
     };
@@ -31,11 +30,11 @@ exports.getAllVehicles = async (req, res) => {
         const vehicles = await Vehicle.find({ user_id });
 
         res.json({ vehicles });
-        logger.info(`Fetch Successfull ${req.user}`);
+        console.log(`Fetch Successfull ${req.user}`);
 
     } catch (error) {
 
-        logger.error(`Error Getting User Vehicle: ${error.message}`);
+        console.error(`Error Getting User Vehicle: ${error.message}`);
         res.status(500).json({ msg: error.message });
 
     };
@@ -53,7 +52,7 @@ exports.trackVehicle = async (req, res) => {
 
         if (speed > 300) {
 
-            logger.warn(`Suspicious Activity Detected`);
+            console.log(`Suspicious Activity Detected`);
             await createTwin(vehicle_id, 'Speed is too High');
 
         }
@@ -62,7 +61,7 @@ exports.trackVehicle = async (req, res) => {
 
     } catch (error) {
 
-        logger.error(`Vehicle Tracking Error; ${error.message}`);
+        console.error(`Vehicle Tracking Error; ${error.message}`);
         res.status(500).json({ msg: error.message });
 
     }

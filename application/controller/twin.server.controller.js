@@ -1,5 +1,4 @@
 const Twin = require('../models/twin.server.model');
-const logger = require('../../config/logger');
 const Vehicle = require('../models/vehicle.server.model');
 const { sendThreatAlert } = require('../websocket/socket');
 
@@ -9,7 +8,7 @@ exports.createTwin = async (vehicle_id, details) => {
 
         const vehicle = await Vehicle.findById(vehicle_id);
         if (!vehicle) {
-            logger.warn(`Attempt to track a non-existent vehicle: ${vehicle_id}`);
+            console.log(`Attempt to track a non-existent vehicle: ${vehicle_id}`);
             return;
         }
 
@@ -23,11 +22,11 @@ exports.createTwin = async (vehicle_id, details) => {
 
         sendThreatAlert(vehicle_id, details);
 
-        logger.warn(`Honeypot Digital Twin created for Vehicle ${vehicle_id} by User ${user_id}`);
+     console.log(`Honeypot Digital Twin created for Vehicle ${vehicle_id} by User ${user_id}`);
 
     } catch (error) {
 
-        logger.error(`Twin Creation Error: ${error.message}`);
+        console.error(`Twin Creation Error: ${error.message}`);
         res.status(500).json({ msg: error.message });
 
     };
@@ -45,7 +44,7 @@ exports.getUserTwins = async (req, res) => {
 
     } catch (error) {
 
-        logger.error(`Fetch Twin Error: ${error.message}`);
+        console.error(`Fetch Twin Error: ${error.message}`);
         res.status(500).json({ msg: error.nessage });
 
     }

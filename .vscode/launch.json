@@ -9,7 +9,7 @@
             "env": {
                 "NODE_ENV": "development",
                 "PORT": "5000",
-                "MONGO_URI":"mongodb://localhost:27017/dtb-guard",
+                "MONGO_URI":"mongodb://localhost:27017/force_test_1",
                 "JWT_SECRET": "25f39066e0ea510fee6c239ffab3426f9d5511c806dadcecdf16654e96375ca570877dd524c5e7cea82ee12f60f18d4f6ad3baf102fa615401e60002fe759d04"
             },
             "restart": true,

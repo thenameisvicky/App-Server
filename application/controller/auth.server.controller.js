@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 const bycrypt = require('bcryptjs');
 const User = require('../models/user.server.model');
-const logger = require('../../config/logger');
 
 exports.signup = async (req, res) => {
 
@@ -18,12 +17,12 @@ exports.signup = async (req, res) => {
         user = new User({ email: lowercase, password: hashedPassword, vehiclesOwned: 0 });
         await user.save();
 
-        logger.info(`New User Registred: ${email}`);
+        console.log(`New User Registred: ${email}`);
         res.json({ msg: "Signup Successfull" });
 
     } catch (error) {
 
-        logger.error(`Signup Error : ${error.message}`);
+        console.error(`Signup Error : ${error.message}`);
         res.status(500).json({ error: error.message })
 
     };
@@ -45,12 +44,12 @@ exports.login = async (req, res) => {
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-        logger.info(`User Logged in :${email}`);
+        console.log(`User Logged in :${email}`);
         res.json({ token });
 
     } catch (error) {
 
-        logger.error(`Error Logging In: ${error.message}`);
+        console.error(`Error Logging In: ${error.message}`);
         res.status(500).json({ error: error.message });
 
     };
