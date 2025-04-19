@@ -12,6 +12,8 @@ const runningServers = [];
 
 async function startServer(id) {
   try {
+    await connection();
+
     const app = express();
     app.use(express.json());
 
@@ -32,12 +34,6 @@ async function startServer(id) {
 
 async function masterProcess() {
   console.log("[MASTER] - Process Started");
-
-  const connected = await connection();
-  if (!connected) {
-    console.error("[MASTER] - DB connection failed. Exiting...");
-    process.exit(1);
-  }
 }
 
 throng({

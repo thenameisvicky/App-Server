@@ -10,11 +10,11 @@ exports.signup = async (req, res) => {
         let user = await User.findOne({ email });
         if (user) return res.status(400).json({ msg: 'Email Already in Use' });
 
-        const salt = await bcrypt.genSalt(10);
+        const salt = await bycrypt.genSalt(10);
         const hashedPassword = await bycrypt.hash(password, salt);
         const lowercase = email.toLowerCase();
 
-        user = new User({ email: lowercase, password: hashedPassword, vehiclesOwned: 0 });
+        user = new User({ email: lowercase, password: hashedPassword, vehiclesOwned: [] });
         await user.save();
 
         console.log(`New User Registred: ${email}`);

@@ -1,5 +1,5 @@
 const Vehicle = require('../models/vehicle.server.model');
-const { createTwin } = require('./twin.server.controller');
+const { createTwin } = require('./twin.server.handler');
 
 exports.addVehicle = async (req, res) => {
 
