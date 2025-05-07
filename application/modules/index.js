@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const authHandler = require('../handler/auth.server.handler');
-const vehicleHandler = require('../handler/vehicle.server.handler');
+const authHandler = require('./auth/auth.server.handler');
+const vehicleHandler = require('./vehicle/vehicle.server.handler');
 
 router.post('/auth/signup', authHandler.signup);
 router.post('/auth/login', authHandler.login);

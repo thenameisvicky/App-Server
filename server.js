@@ -1,7 +1,8 @@
 const express = require("express");
 const throng = require("throng");
+const cors = require("cors");
 const os = require("os");
-const router = require("./application/routes");
+const router = require("./application/modules/index");
 const terminationArc = require("./utils/server.utils");
 const connection = require("./config/database");
 
@@ -16,6 +17,7 @@ async function startServer(id) {
 
     const app = express();
     app.use(express.json());
+    app.use(cors());
 
     app.use("/api", router);
 
