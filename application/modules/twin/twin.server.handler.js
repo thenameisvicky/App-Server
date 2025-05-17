@@ -9,20 +9,18 @@ exports.createTwin = async (vehicle_id, details) => {
       return;
     }
 
-    const newTwin = new DigitalTwin({
-      user_id,
-      vehicle_id,
+    const newTwin = new Twin({
+      user_id: details.user_id,
+      vehicle_id: vehicle._id,
       is_honeypot: true,
       status: "active",
     });
+
     await newTwin.save();
 
-    console.log(
-      `Honeypot Digital Twin created for Vehicle ${vehicle_id} by User ${user_id}`
-    );
+    console.log(`Honeypot Digital Twin created for Vehicle ${vehicle_id} by User ${details.user_id}`);
   } catch (error) {
     console.error(`Twin Creation Error: ${error.message}`);
-    res.status(500).json({ msg: error.message });
   }
 };
 

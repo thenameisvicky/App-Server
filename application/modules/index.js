@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
-const authHandler = require('./auth/auth.server.handler');
-const vehicleHandler = require('./vehicle/vehicle.server.handler');
+const authProxy = require('./auth/auth.server.proxy');
+const vehicleProxy = require('./vehicle/vehicle.server.proxy');
 
-router.post('/auth/signup', authHandler.signup);
-router.post('/auth/login', authHandler.login);
+router.post('/auth/signup', authProxy.signup);
+router.post('/auth/login', authProxy.login);
 
-router.post('/vehicles/add', vehicleHandler.addVehicle);
-router.get('/vehicles/:id', vehicleHandler.getAllVehicles);
+router.post('/vehicles/add', vehicleProxy.addVehicle);
+router.get('/vehicles/:id', vehicleProxy.getAllVehicles);
+router.post('/track/:id',vehicleProxy.trackVehicle);
 
 module.exports = router;
