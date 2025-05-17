@@ -23,5 +23,8 @@
     "socket.io": "^4.8.1",
     "throng": "^5.0.0",
     "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.27.0"
   }
 }
